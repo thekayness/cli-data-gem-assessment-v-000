@@ -3,26 +3,37 @@ require "spec_helper"
 #change to Brewery_Fetcher
 describe "Brewery_Fetcher" do
 
-  #make example brewery request hash
+  #make example brewery request array
   let!(:brewery_query_array) {[{:name=>"Spiritus Fermenti", :street_address=>"220 Meeting Street", :phone=>"(401) 273-1999"},
                                {:name=>"Trinity Brewhouse", :street_address=>"186 Fountain Street", :phone=>"(401) 453-2337"},
                                {:name=>"Narragansett Brewing Company", :street_address =>"60 Ship Street", :phone="(401) 437-8970"}]}
 
   #make example brewery score hash
-  let!(:student_joe_hash) {{:twitter=>"https://twitter.com/jmburges",
-                            :linkedin=>"https://www.linkedin.com/in/jmburges",
-                            :github=>"https://github.com/jmburges",
-                            :blog=>"http://joemburgess.com/",
-                            :profile_quote=>"\"Reduce to a previously solved problem\"",
-                            :bio=>
-  "I grew up outside of the Washington DC (NoVA!) and went to college at Carnegie Mellon University in Pittsburgh. After college, I worked as an Oracle consultant for IBM for a bit and now I teach here at The Flatiron School."}}
+  let!(:brewery_trinity_score) {
+    {
+      :overall_score=>82.9,
+      :selection=>4.31,
+      :service=>4.00,
+      :atmosphere=>4.13,
+      :review_count=>4,
+      :food=>3.94,
+      :fb_score=>3.6,
+      :fb_count=>4
+    }
+  }
+
   #make example brewery without score hash?
-  let!(:student_david_hash) {{:linkedin=>"https://www.linkedin.com/in/david-kim-38221690",
- :github=>"https://github.com/davdkm",
- :profile_quote=>
-  "\"Yeah, well, you know, that's just, like, your opinion, man.\" - The Dude",
- :bio=>
-  "I'm a southern California native seeking to find work as a full stack web developer. I enjoying tinkering with computers and learning new things!"}}
+  let!(:gansett_score)   {
+      :overall_score=>82.9,
+      :selection=>4.31,
+      :service=>4.00,
+      :atmosphere=>4.13,
+      :review_count=>4,
+      :food=>3.94,
+      :fb_score=>3.6,
+      :fb_count = 4
+    }
+  }
 
   #describe #query_api
   describe "#scrape_index_page" do
