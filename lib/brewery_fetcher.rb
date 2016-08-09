@@ -28,7 +28,7 @@ class Scraper
     return students
   end
 
-#change to self.fetch_addtl_info
+#change to self.fetch_score_info
   def self.scrape_profile_page(profile_url)
     url = Nokogiri::HTML(open(profile_url))
     #brewery score profile

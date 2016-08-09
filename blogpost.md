@@ -12,7 +12,8 @@ Step 2 Figure Out Approach
 Step 3 Start Making Things happen
 - copy entirety student scraper into cli assessment folder
 - commit
-- comment up all the student scraper code
+- comment up all the student scraper code -- actually committed here
+- copy over student scraper specs -- commit
 - comment up all the student scraper specs!
 
 Thoughts:

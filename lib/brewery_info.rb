@@ -21,7 +21,7 @@ class Student
     end
   end
 
-  #change to score_hash
+  #change to add_brewery_info, score_hash
   def add_student_attributes(attributes_hash)
     attributes_hash.each do |key, value|
       self.send(("#{key}="), value)
