@@ -18,7 +18,7 @@ class Scraper
       :name => student_card.css("h4.student-name").text,
       #street address
       :location => student_card.css("p.student-location").text,
-      #city, state, zip?
+      #phone number
       :profile_url =>"./fixtures/student-site/" + student_card.css("a").attribute("href").value
       }
       #add brewery to breweries

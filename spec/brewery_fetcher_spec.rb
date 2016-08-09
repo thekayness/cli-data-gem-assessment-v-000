@@ -36,31 +36,36 @@ describe "Brewery_Fetcher" do
   }
 
   #describe #query_api
-  describe "#scrape_index_page" do
-    it "is a class method that scrapes the student index page and a returns an array of hashes in which each hash represents one student" do
-      index_url = "./fixtures/student-site/index.html"
-      scraped_students = Scraper.scrape_index_page(index_url)
-      expect(scraped_students).to be_a(Array)
-      expect(scraped_students.first).to have_key(:location)
-      expect(scraped_students.first).to have_key(:name)
-      expect(scraped_students).to include(student_index_array[0], student_index_array[1], student_index_array[2])
+  describe "#query_api" do
+    it "is a class method that sends a location query to the beer mapping API and a returns an array of hashes in which each hash represents one brewery" do
+      example_location_query = "http://beermapping.com/webservice/loccity/21110efff66df69d91ec3909c0a38eed/providence,ri"
+      fetched_breweries = Brewery_Fetcher.query_api(example_location_query)
+      expect(fetched_breweries).to be_a(Array)
+      expect(fetched_breweries.first).to have_key(:street_address)
+      expect(fetched_breweries.first).to have_key(:name)
+      expect(fetched_breweries).to include(brewery_query_array[0], brewery_query_array[1], brewery_query_array[2])
     end
   end
 
   #describe #fetch_score_info
-  describe "#scrape_profile_page" do
-    it "is a class method that scrapes a student's profile page and returns a hash of attributes describing an individual student" do
-      profile_url = "./fixtures/student-site/students/joe-burgess.html"
-      scraped_student = Scraper.scrape_profile_page(profile_url)
-      expect(scraped_student).to be_a(Hash)
-      expect(scraped_student).to match(student_joe_hash)
+  describe "#fetch_score_info" do
+    it "is a class method that scrapes sends a score query to the beer mapping API and returns a hash of rating scores given to an individual brewery" do
+
+      #FIND OUT ID FOR TRINITY
+      example_score_query = "http://beermapping.com/webservice/locscore/21110efff66df69d91ec3909c0a38eed/findoutiddddddddd"
+      fetched_score = Brewery_Fetcher.fetch_score_info(example_score_query)
+      expect(fetched_score).to be_a(Hash)
+      expect(fetched_score).to match(brewery_trinity_score)
     end
-    #it can handle a brewery with no added score info?
-    it "can handle profile pages without all of the social links" do
-      profile_url = "./fixtures/student-site/students/david-kim.html"
-      scraped_student = Scraper.scrape_profile_page(profile_url)
-      expect(scraped_student).to be_a(Hash)
-      expect(scraped_student).to match(student_david_hash)
+    #it can handle a brewery with no score info?
+    it "can handle breweries with no scoring data" do
+
+      #FIND OUT ID FOR
+      no_score_example = "http://beermapping.com/webservice/locscore/21110efff66df69d91ec3909c0a38eed/findoutiddddddddd"
+      no_score_brewery = Brewery_Fetcher.fetch_score_info(no_score_example)
+      #????maybe not a hash?
+      expect(no_score_brewery).to be_a(Hash)
+      expect(no_score_brewery).to match(gansett_score)
     end
   end
 end
