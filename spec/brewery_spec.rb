@@ -3,7 +3,7 @@ require "spec_helper"
 #describe Brewery
 describe "Brewery" do
   #make example brewery hash
-  let!(:example_brewery_hash) {[{:name=>"Coastal Extreme Brewing Co.", :street_address=>"307 Oliphant Lane"},
+  let!(:example_brewery_array) {[{:name=>"Coastal Extreme Brewing Co.", :street_address=>"307 Oliphant Lane"},
  {:name=>"Coddington Brewing Co.", :street_address=>"210 Coddington Highway"},
  {:name=>"Sandy's Liquors", :street_address=>"717 Aquidneck Avenue"},
 ]}
@@ -16,9 +16,7 @@ describe "Brewery" do
        :service=>4.00,
        :atmosphere=>4.13,
        :review_count=>4,
-       :food=>3.94,
-       :fb_score=>3.6,
-       :fb_count=>4
+       :food=>3.94
      }
    }
 
@@ -41,29 +39,30 @@ describe "Brewery" do
   end
 
   describe ".create_from_collection" do
-    it "uses the Scraper class to create new students with the correct name and location." do
-      Student.class_variable_set(:@@all, [])
-      Student.create_from_collection(student_index_array)
-      expect(Student.class_variable_get(:@@all).first.name).to eq("Alex Patriquin")
+    it "uses the Brewery_Fetcher class to create new breweries with the correct name and location." do
+      Brewery.class_variable_set(:@@all, [])
+      Brewery.create_from_collection(example_brewery_array)
+      expect(Brewery.class_variable_get(:@@all).first.name).to eq("Coastal Extreme Brewing Co.")
     end
   end
   #describe add_brewery_info
-  describe "#add_student_attributes" do
-    it "uses the Scraper class to get a hash of a given students attributes and uses that hash to set additional attributes for that student." do
-      student.add_student_attributes(student_hash)
-      expect(student.bio).to eq("I was in southern California for college (sun and In-n-Out!), rural Oregon for high school (lived in a town with 1500 people and 3000+ cows), and Tokyo for elementary/middle school.")
-      expect(student.blog).to eq("someone@blog.com")
-      expect(student.linkedin).to eq("someone@linkedin.com")
-      expect(student.profile_quote).to eq("\"Forget safety. Live where you fear to live. Destroy your reputation. Be notorious.\" - Rumi")
-      expect(student.twitter).to eq("someone@twitter.com")
+  describe "#add_brewery_info" do
+    it "uses the Brewery_Fetcher class to get a hash of a given brewery's attributes and uses that hash to set additional attributes for that brweery." do
+      brewery.add_brewery_info(example_score_hash)
+      expect(brewery.overall_score).to eq(82.9)
+      expect(brewery.selection).to eq(4.31)
+      expect(brewery.service).to eq(4.00)
+      expect(brewery.atmosphere).to eq(4.13)
+      expect(brewery.review_count).to eq(4)
+      expect(brewery.food).to eq(3.94)
     end
   end
 
   #this can stay mostly the same, change Student to Brewery
   describe '.all' do
     it 'returns the class variable @@all' do
-      Student.class_variable_set(:@@all, [])
-      expect(Student.all).to match_array([])
+      Brewery.class_variable_set(:@@all, [])
+      expect(Brewery.all).to match_array([])
     end
   end
 end

@@ -16,9 +16,7 @@ describe "Brewery_Fetcher" do
       :service=>4.00,
       :atmosphere=>4.13,
       :review_count=>4,
-      :food=>3.94,
-      :fb_score=>3.6,
-      :fb_count=>4
+      :food=>3.94
     }
   }
 
