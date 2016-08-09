@@ -1,12 +1,12 @@
 require "spec_helper"
 
 #change to Brewery_Fetcher
-describe "Scraper" do
+describe "Brewery_Fetcher" do
 
   #make example brewery request hash
-  let!(:student_index_array) {[{:name=>"Joe Burgess", :location=>"New York, NY", :profile_url=>"./fixtures/student-site/students/joe-burgess.html"},
-                               {:name=>"Mathieu Balez", :location=>"New York, NY", :profile_url=>"./fixtures/student-site/students/mathieu-balez.html"},
-                               {:name=>"Diane Vu", :location=>"New York, NY", :profile_url=>"./fixtures/student-site/students/diane-vu.html"}]}
+  let!(:brewery_query_array) {[{:name=>"Spiritus Fermenti", :street_address=>"220 Meeting Street", :phone=>"(401) 273-1999"},
+                               {:name=>"Trinity Brewhouse", :street_address=>"186 Fountain Street", :phone=>"(401) 453-2337"},
+                               {:name=>"Narragansett Brewing Company", :street_address =>"60 Ship Street", :phone="(401) 437-8970"}]}
 
   #make example brewery score hash
   let!(:student_joe_hash) {{:twitter=>"https://twitter.com/jmburges",
