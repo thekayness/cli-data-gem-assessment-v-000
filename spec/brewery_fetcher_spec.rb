@@ -50,7 +50,6 @@ describe "Brewery_Fetcher" do
   #describe #fetch_score_info
   describe "#fetch_score_info" do
     it "is a class method that scrapes sends a score query to the beer mapping API and returns a hash of rating scores given to an individual brewery" do
-
       #FIND OUT ID FOR TRINITY
       example_score_query = "http://beermapping.com/webservice/locscore/21110efff66df69d91ec3909c0a38eed/findoutiddddddddd"
       fetched_score = Brewery_Fetcher.fetch_score_info(example_score_query)
@@ -59,7 +58,6 @@ describe "Brewery_Fetcher" do
     end
     #it can handle a brewery with no score info?
     it "can handle breweries with no scoring data" do
-
       #FIND OUT ID FOR
       no_score_example = "http://beermapping.com/webservice/locscore/21110efff66df69d91ec3909c0a38eed/findoutiddddddddd"
       no_score_brewery = Brewery_Fetcher.fetch_score_info(no_score_example)

@@ -1,40 +1,42 @@
 require "spec_helper"
 
 #describe Brewery
-describe "Student" do
+describe "Brewery" do
   #make example brewery hash
-  let!(:student_index_array) {[{:name=>"Alex Patriquin", :location=>"New York, NY"},
- {:name=>"Bacon McRib", :location=>"Kansas City, MO"},
- {:name=>"Alisha McWilliams", :location=>"San Francisco, CA"},
- {:name=>"Daniel Fenjves", :location=>"Austin, TX"},
- {:name=>"Arielle Sullivan", :location=>"Chicago, IL"},
- {:name=>"Sushanth Bhaskarab", :location=>"Portland, OR"},
- {:name=>"Sushanth Bhaskarab", :location=>"Portland, OR"}]}
+  let!(:example_brewery_hash) {[{:name=>"Coastal Extreme Brewing Co.", :street_address=>"307 Oliphant Lane"},
+ {:name=>"Coddington Brewing Co.", :street_address=>"210 Coddington Highway"},
+ {:name=>"Sandy's Liquors", :street_address=>"717 Aquidneck Avenue"},
+]}
 
  #make example score hash
- let!(:student_hash) {{:twitter=>"someone@twitter.com",
- :linkedin=>"someone@linkedin.com",
- :github=>"someone@github.com",
- :blog=>"someone@blog.com",
- :profile_quote=>"\"Forget safety. Live where you fear to live. Destroy your reputation. Be notorious.\" - Rumi",
- :bio=>
-  "I was in southern California for college (sun and In-n-Out!), rural Oregon for high school (lived in a town with 1500 people and 3000+ cows), and Tokyo for elementary/middle school."}}
+ let!(:example_score_hash) {
+   {
+       :overall_score=>82.9,
+       :selection=>4.31,
+       :service=>4.00,
+       :atmosphere=>4.13,
+       :review_count=>4,
+       :food=>3.94,
+       :fb_score=>3.6,
+       :fb_count=>4
+     }
+   }
 
   #create example brewery
-  let!(:student) {Student.new({:name=>"Alex Patriquin", :location=>"New York, NY"})}
+  let!(:brewery) {Brewery.new({:name=>"Coastal Extreme Brewing Co.", :street_address=>"301 Oliphant Lane"})}
 
   after(:each) do
-    Student.class_variable_set(:@@all, [])
+    Brewery.class_variable_set(:@@all, [])
   end
   describe "#new" do
-    it "takes in an argument of a hash and sets that new student's attributes using the key/value pairs of that hash." do
-      expect{Student.new({:name => "Sophie DeBenedetto", :location => "Brooklyn, NY"})}.to_not raise_error
-      expect(student.name).to eq("Alex Patriquin")
-      expect(student.location).to eq("New York, NY")
+    it "takes in an argument of a hash and sets that new brewery's attributes using the key/value pairs of that hash." do
+      expect{Brewery.new({:name => "Coddington Brewing Co.", :street_address => "210 Coddington Highway"})}.to_not raise_error
+      expect(brewery.name).to eq("Coastal Extreme Brewing Co.")
+      expect(brewery.street_address).to eq("301 Oliphant Lane")
     end
 
-    it "adds that new student to the Student class' collection of all existing students, stored in the `@@all` class variable." do
-      expect(Student.class_variable_get(:@@all).first.name).to eq("Alex Patriquin")
+    it "adds that new brewery to the Brewery class' collection of all existing breweries, stored in the `@@all` class variable." do
+      expect(Brewery.class_variable_get(:@@all).first.name).to eq("Coastal Extreme Brewing Co.")
     end
   end
 
