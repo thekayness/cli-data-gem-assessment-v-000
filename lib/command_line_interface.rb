@@ -28,8 +28,8 @@ class CommandLineInterface
                      (______________)
     DOC
     #first ask user for location query
-    get_location_query
-    format_location_query(city_state_formatted)
+
+    format_location_query(get_location_query)
     #use results from get_query to get matching breweries
     #change to get_breweries
     get_breweries(location_query)
@@ -50,17 +50,21 @@ class CommandLineInterface
 
   def get_location_query
     puts "Please enter the initials of a state you would like to search in:"
-    until state.match(/^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/)
-      state = gets.chomp.downcase
+    begin
       puts "A valid state abbreviation is two letters."
-    end
+      state = gets.chomp
+    end until state.match(/^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/)
+
     puts "Now enter a city:"
-    city = gets.chomp.downcase
+    begin
+      puts "Any city in #{state}"
+      city = gets.chomp.downcase
+    end until city.match(/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/)
     city_state_formatted = '/' + city + ',' + state
   end
 
   def format_location_query(location)
-    location_query = BASE_PATH + '/loccity/' + KEY + location
+    location_query = BASE_PATH + 'loccity/' + KEY + location
   end
 
   def get_score_query
@@ -73,7 +77,7 @@ class CommandLineInterface
   end
 
   def format_score_query(brewery_id)
-    score_query = BASE_PATH + '/locscore/' + KEY + '/' brewery_id
+    score_query = BASE_PATH + 'locscore/' + KEY + '/' brewery_id
   end
 #grab brewery objects from API
   def get_breweries(location_query)

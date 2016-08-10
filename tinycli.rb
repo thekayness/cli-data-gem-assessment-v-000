@@ -16,8 +16,13 @@ class CommandLineInterface
     end until state.match(/^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/)
 #hey we can match states why not
     puts "Now enter a city:"
-    city = gets.chomp.downcase
+    begin
+      puts "any city in #{state}"
+      city = gets.chomp.downcase
+    end until city.match(/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/)
+
     city_state_formatted = '/' + city + ',' + state.downcase
+    #puts "#{city_state_formatted}"
   end
 #what do we want to happen?
   def run
@@ -38,9 +43,14 @@ class CommandLineInterface
                      (______________)
     DOC
     #first ask user for location query
-  get_location_query
+  #get_location_query
+  format_location_query(get_location_query)
   end
 
+  def format_location_query(location)
+    location_query = BASE_PATH + 'loccity/' + KEY + location
+    puts "#{location_query}"
+  end
 
 
 end
