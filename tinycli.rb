@@ -50,7 +50,7 @@ class CommandLineInterface
   #change to get_breweries
   get_breweries(formatted_query)
   #display_matching_breweries
-  display_breweries
+  #display_breweries
   end
 
   def format_location_query(location)
@@ -61,17 +61,17 @@ class CommandLineInterface
   #grab brewery objects from API
   def get_breweries(location_query)
     brewery_array = Brewery_Fetcher.query_api(location_query)
-    puts "#{brewery_array}"
+    #puts "#{brewery_array}"
     #create instances of breweries from each brewery fetched
     Brewery.create_from_collection(brewery_array)
   end
 
   def display_breweries
+    puts "#{Brewery.all}"
     Brewery.all.each do |brewery|
       puts "#{brewery.name}".colorize(:magenta)
-      puts "ID: #{brewery.id}".colorize(:green)
       puts "#{brewery.street_address}".colorize(:blue)
-      puts "#{brewery.phone}".colorize(:orange)
+      puts "#{brewery.phone}".colorize(:yellow)
     end
   end
 

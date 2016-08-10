@@ -7,16 +7,23 @@ class Brewery
   @@all = []
 
   def initialize(brewery_hash)
+    #puts "#{brewery_hash}"
     brewery_hash.each do |key, value|
+      #puts "#{key} #{value}"
       self.send(("#{key}="), value)
+      #puts "#{self.phone}"
       @@all << self
     end
+
+    #puts "#{@@all}"
   end
 
   #change students_array to brewery_array
   def self.create_from_collection(brewery_array)
-    brewery_array.each do |brewery_hash|
+    #puts "#{brewery_array}"
+    brewery_array.each_with_index do |brewery_hash, index|
       #Brewery.new
+      #puts "#{brewery_hash} #{index}"
       Brewery.new(brewery_hash)
     end
   end
