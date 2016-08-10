@@ -46,9 +46,9 @@ describe "Brewery" do
     end
   end
   #describe add_brewery_info
-  describe "#add_brewery_info" do
+  describe "#add_score_info" do
     it "uses the Brewery_Fetcher class to get a hash of a given brewery's attributes and uses that hash to set additional attributes for that brweery." do
-      brewery.add_brewery_info(example_score_hash)
+      brewery.add_score_info(example_score_hash)
       expect(brewery.overall_score).to eq(82.9)
       expect(brewery.selection).to eq(4.31)
       expect(brewery.service).to eq(4.00)
