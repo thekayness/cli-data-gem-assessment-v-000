@@ -1,9 +1,9 @@
-require_relative "../lib/scraper.rb"
-require_relative "../lib/student.rb"
+require_relative "../lib/brewery_fetcher.rb"
+require_relative "../lib/brewery_info.rb"
 require 'nokogiri'
 require 'colorize'
 
-class CommandLineInteface
+class CommandLineInterface
 #change this to base api query
   BASE_PATH = "http://beermapping.com/webservice/"
   KEY = "21110efff66df69d91ec3909c0a38eed"
@@ -54,10 +54,8 @@ class CommandLineInteface
       state = gets.chomp.downcase
       puts "A valid state abbreviation is two letters."
     end
-
     puts "Now enter a city:"
     city = gets.chomp.downcase
-
     city_state_formatted = '/' + city + ',' + state
   end
 
@@ -67,17 +65,16 @@ class CommandLineInteface
 
   def get_score_query
     puts "Which brewery would you like to learn more about?"
-    until id.match(/(\d{4,6})/)
+    until (id.match(/(\d{4,6})/))
       puts "A valid brewery id is between 4 and 6 digits:"
       id = gets.chomp
     end
-    return id
+    id
   end
 
   def format_score_query(brewery_id)
     score_query = BASE_PATH + '/locscore/' + KEY + '/' brewery_id
   end
-
 #grab brewery objects from API
   def get_breweries(location_query)
     brewery_array = Brewery_Fetcher.query_api(location_query)
@@ -94,7 +91,7 @@ class CommandLineInteface
   def add_scores_to_brewery(brewery_id, score_hash)
     scored_brewery = Brewery.all.detect{|brewery| brewery.id = brewery_id}
     scored_brewery.add_score_info(score_hash)
-    return scored_brewery
+    scored_brewery
   end
 
   def display_breweries
