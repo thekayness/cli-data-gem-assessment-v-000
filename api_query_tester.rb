@@ -6,12 +6,12 @@ breweries = []
 #we gotta use something called xpath?
 api_request.xpath("//location").each do |location|
   brewery = {
+    :id => location.xpath("child::id").text.to_i,
   :name => location.xpath("child::name").text,
   :street_address => location.xpath("child::street").text,
   :phone => location.xpath("child::phone").text
   }
   #add brewery to breweries
   breweries << brewery
+  puts "#{brewery}"
 end
-
-puts "#{breweries}"
