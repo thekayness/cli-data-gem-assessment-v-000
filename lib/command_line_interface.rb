@@ -33,10 +33,10 @@ class CommandLineInteface
     #change to get_breweries
     get_request(query_type)
     #display_matching_breweries
-
+    display_breweries
     #ask user for a brewery/breweries they want to learn more about
     #get_requested_brewery
-
+    get_score_query
     #change to get_brewery_info
     add_attributes_to_students
     #display brewery's additional info
@@ -61,6 +61,14 @@ class CommandLineInteface
 
     query_type = BASE_PATH + 'loccity/' + KEY + state_formatted + city
   end
+
+  def get_score_query
+    puts "Which brewery would you like to learn more about?"
+    until id.match(/(\d{4,6})/)
+
+    endid = gets.chomp
+
+
 #grab brewery objects from API
   def get_request(query_type)
     breweries_array = Brewery_Fetcher.query_api(query_type)
