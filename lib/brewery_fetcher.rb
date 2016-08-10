@@ -19,43 +19,25 @@ class Brewery_Fetcher
       breweries << brewery
     end
 
-    #return breweries
     return breweries
   end
 
 #change to self.fetch_score_info
-  def self.scrape_profile_page(profile_url)
-    url = Nokogiri::HTML(open(profile_url))
+  def self.fetch_score_info(score_request)
+    returned_scores = Nokogiri::HTML(open(score_request))
     #brewery score profile
-    student_profile = {}
-
-    #change to reflect in depth score attributes
+    score_profile = {
     #overall_score, selection, service, atmosphere, food, review_count, fb_score, fb_count
-    links = url.css("div.social-icon-container a")
-    links.each do |link|
-
-      link_text = link.attribute("href").value
-      if (link_text.include?("github"))
-        student_profile[:github] = link_text
-
-      elsif (link_text.include?("twitter"))
-        student_profile[:twitter] = link_text
-
-      elsif (link_text.include?("linkedin"))
-        student_profile[:linkedin] = link_text
-
-      else
-        student_profile[:blog] = link_text
-
-      end
-    end
-
-    student_profile[:bio] = url.css("div.bio-content p").text
-
-    student_profile[:profile_quote] = url.css("div.profile-quote").text
+      :overall_score => returned_scores.xpath("child::overall").value,
+      :selection => returned_scores.xpath("child::selection").value,
+      :service => returned_scores.xpath("child::service").value,
+      :atmosphere => returned_scores.xpath("child::atmosphere").value,
+      :review_count => returned_scores.xpath ("child::reviewcount").value,
+      :food=>returned_scores.xpath("child::food")
+      }
 
     #return brewery score profile
-    return student_profile
+    return score_profile
 
   end
 
