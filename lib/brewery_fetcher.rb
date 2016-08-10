@@ -30,12 +30,12 @@ class Brewery_Fetcher
     score_location = returned_scores.xpath("//location")
     score_profile = {
     #overall_score, selection, service, atmosphere, food, review_count
-      :overall_score => score_location.xpath("child::overall").text.to_f,
-      :selection => score_location.xpath("child::selection").text.to_f,
-      :service => score_location.xpath("child::service").text.to_f,
-      :atmosphere => score_location.xpath("child::atmosphere").text.to_f,
+      :overall_score => score_location.xpath("child::overall").text.to_f.round(1),
+      :selection => score_location.xpath("child::selection").text.to_f.round(2),
+      :service => score_location.xpath("child::service").text.to_f.round(2),
+      :atmosphere => score_location.xpath("child::atmosphere").text.to_f.round(2),
       :review_count => score_location.xpath("child::reviewcount").text.to_i,
-      :food=>score_location.xpath("child::food").text.to_f
+      :food=>score_location.xpath("child::food").text.to_f.round(2)
       }
 
     #return brewery score profile

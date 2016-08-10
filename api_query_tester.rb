@@ -16,7 +16,7 @@ api_request.xpath("//location").each do |location|
   #puts "#{brewery}"
 end
 
-returned_scores = Nokogiri::HTML(open("http://beermapping.com/webservice/locscore/21110efff66df69d91ec3909c0a38eed/1341"))
+returned_scores = Nokogiri::HTML(open("http://beermapping.com/webservice/locscore/21110efff66df69d91ec3909c0a38eed/15566"))
 #brewery score profile
 score_location = returned_scores.xpath("//location")
 score_profile = {
@@ -28,6 +28,6 @@ score_profile = {
   :review_count => score_location.xpath("child::reviewcount").text.to_f,
   :food=>score_location.xpath("child::food").text.to_f
   }
-#puts "#{returned_scores}"
+puts "#{returned_scores}"
 puts"#{score_location}"
   puts "#{score_profile}"
