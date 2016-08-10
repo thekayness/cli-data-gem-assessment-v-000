@@ -5,17 +5,33 @@ require 'colorize'
 
 class CommandLineInteface
 #change this to base api query
-  BASE_PATH = "./fixtures/student-site/"
+  BASE_PATH = "http://beermapping.com/webservice/"
+  KEY = "21110efff66df69d91ec3909c0a38eed"
 
 #what do we want to happen?
   def run
+    #first welcome user
+    puts "\e[H\e[2J"
+    puts <<-DOC
+                      o©ºº©oo©oº°©
+                      /           \
+                      |___________|____
+                      |            |____)
+                      |  WELCOME   |  | |
+                      |            |  | |
+                      |    TO      |  | |
+                      |            |  | |
+                      |  B R E W   |  | |
+                      |            |__|_|
+                      |   FINDER!  |____)
+                      |____________|
+                     (______________)
+    DOC
     #first ask user for location query
-    #wget_query
-
+    get_search_query
     #use results from get_query to get matching breweries
     #change to get_breweries
-    make_students
-
+    get_request(query_type)
     #display_matching_breweries
 
     #ask user for a brewery/breweries they want to learn more about
@@ -32,13 +48,24 @@ class CommandLineInteface
 #make a method that asks for a city/state to query & formats for api request
   #method name: get_query
 
+  def get_search_query
+    puts "Please enter the initials of a state you would like to search in:"
+    until state.match(/^(?:(A[KLRZ]|C[AOT]|D[CE]|FL|GA|HI|I[ADLN]|K[SY]|LA|M[ADEINOST]|N[CDEHJMVY]|O[HKR]|P[AR]|RI|S[CD]|T[NX]|UT|V[AIT]|W[AIVY]))$/)
+      state = gets.chomp.downcase
+      puts "A valid state abbreviation is two letters."
+    end
+    state_formatted = '/' + state + ','
+
+    puts "Now enter a city:"
+    city = gets.chomp.downcase
+
+    query_type = BASE_PATH + 'loccity/' + KEY + state_formatted + city
+  end
 #grab brewery objects from API
-  def make_students
-    #shove breweries into brewery array using brewery fetcher
-    #change scrape_index_page method to query_api, change index.html to get_query
-    students_array = Scraper.scrape_index_page(BASE_PATH + 'index.html')
+  def get_request(query_type)
+    breweries_array = Brewery_Fetcher.query_api(query_type)
     #create instances of breweries from each brewery fetched
-    Student.create_from_collection(students_array)
+    Brewery.create_from_collection(brewery_array)
   end
 
 #make a method that displays only breweries returned
@@ -51,6 +78,14 @@ class CommandLineInteface
       student.add_student_attributes(attributes)
     end
   end
+
+  def display_breweries
+    Brewery.all.each do |brewery|
+      puts "#{brewery.name}".colorize(:purple)
+      puts "#{brewery.id}".colorize(:green)
+      puts "#{brewery.street_address}".colorize(:blue)
+      puts "#{brewery.phone}".colorize(:orange)
+    end
 
 #display additional requested brewery info
   def display_students
