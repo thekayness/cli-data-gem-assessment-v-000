@@ -27,14 +27,15 @@ class Brewery_Fetcher
   def self.fetch_score_info(score_request)
     returned_scores = Nokogiri::HTML(open(score_request))
     #brewery score profile
+    score_location = returned_scores.xpath("//location")
     score_profile = {
-    #overall_score, selection, service, atmosphere, food, review_count, fb_score, fb_count
-      :overall_score => returned_scores.xpath("child::overall").text.to_i,
-      :selection => returned_scores.xpath("child::selection").text.to_i,
-      :service => returned_scores.xpath("child::service").text.to_i,
-      :atmosphere => returned_scores.xpath("child::atmosphere").text.to_i,
-      :review_count => returned_scores.xpath ("child::reviewcount").text.to_i,
-      :food=>returned_scores.xpath("child::food").text.to_i
+    #overall_score, selection, service, atmosphere, food, review_count
+      :overall_score => score_location.xpath("child::overall").text.to_f,
+      :selection => score_location.xpath("child::selection").text.to_f,
+      :service => score_location.xpath("child::service").text.to_f,
+      :atmosphere => score_location.xpath("child::atmosphere").text.to_f,
+      :review_count => score_location.xpath("child::reviewcount").text.to_i,
+      :food=>score_location.xpath("child::food").text.to_f
       }
 
     #return brewery score profile
