@@ -20,6 +20,7 @@ Step 3 Start Making Things happen
 - do some testing, be wrong -- commit
 - try and record some video -- get attacked by giant moth, get bothered by SO, accidentally stop recording
 - while listening to myself, realize what I was doing wrong -- and that my voice sounds like I'm 10 years old
+- record some more video
 
 Thoughts:
 - a blank page is intimidating, drawing parallels between your model and an existing one is not

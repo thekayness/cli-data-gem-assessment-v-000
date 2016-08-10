@@ -2,30 +2,25 @@ require 'open-uri'
 require 'nokogiri'
 require 'pry'
 
-#change to Brewery_Fetcher
-class Scraper
+class Brewery_Fetcher
 
-#change to self.query_api, change index_url to api_query
-  def self.scrape_index_page(index_url)
-    url = Nokogiri::HTML(open(index_url))
+  def self.query_api(api_query)
+    returned_request = Nokogiri::HTML(open(api_query))
 
-    #change to breweries[]
-    students = []
-
-    url.css("div.student-card").each do |student_card|
-      #brewery
-      student = {
-      :name => student_card.css("h4.student-name").text,
-      #street address
-      :location => student_card.css("p.student-location").text,
-      #phone number
-      :profile_url =>"./fixtures/student-site/" + student_card.css("a").attribute("href").value
+    breweries = []
+    #we gotta use something called xpath?
+    returned_request.xpath("//location").each do |location|
+      brewery = {
+      :name => location.xpath("child::name").text,
+      :street_address => location.xpath("child::street").text,
+      :phone => location.xpath("child::phone").text
       }
       #add brewery to breweries
-      students << student
+      breweries << brewery
     end
+
     #return breweries
-    return students
+    return breweries
   end
 
 #change to self.fetch_score_info
