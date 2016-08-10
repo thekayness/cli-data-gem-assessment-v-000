@@ -44,14 +44,36 @@ class CommandLineInterface
     DOC
     #first ask user for location query
   #get_location_query
-  format_location_query(get_location_query)
+  first_location_query = get_location_query
+  formatted_query = format_location_query(first_location_query)
+  #use results from get_query to get matching breweries
+  #change to get_breweries
+  get_breweries(formatted_query)
+  #display_matching_breweries
+  display_breweries
   end
 
   def format_location_query(location)
     location_query = BASE_PATH + 'loccity/' + KEY + location
-    puts "#{location_query}"
+    #puts "#{location_query}"
   end
 
+  #grab brewery objects from API
+  def get_breweries(location_query)
+    brewery_array = Brewery_Fetcher.query_api(location_query)
+    puts "#{brewery_array}"
+    #create instances of breweries from each brewery fetched
+    Brewery.create_from_collection(brewery_array)
+  end
+
+  def display_breweries
+    Brewery.all.each do |brewery|
+      puts "#{brewery.name}".colorize(:magenta)
+      puts "ID: #{brewery.id}".colorize(:green)
+      puts "#{brewery.street_address}".colorize(:blue)
+      puts "#{brewery.phone}".colorize(:orange)
+    end
+  end
 
 end
 

@@ -28,8 +28,8 @@ class CommandLineInterface
                      (______________)
     DOC
     #first ask user for location query
-
-    format_location_query(get_location_query)
+    location_query = get_location_query
+    format_location_query(location_query)
     #use results from get_query to get matching breweries
     #change to get_breweries
     get_breweries(location_query)
