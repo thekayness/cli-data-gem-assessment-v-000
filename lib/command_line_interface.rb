@@ -28,7 +28,7 @@ class CommandLineInteface
                      (______________)
     DOC
     #first ask user for location query
-    get_search_query
+    get_location_query
     format_location_query(city_state_formatted)
     #use results from get_query to get matching breweries
     #change to get_breweries
@@ -39,6 +39,7 @@ class CommandLineInteface
     get_score_query
     format_score_query(id)
     get_brewery_score(score_query)
+    add_scores_to_brewery(id, scores)
     #display brewery's additional info
     display_score
   end
@@ -84,14 +85,16 @@ class CommandLineInteface
     Brewery.create_from_collection(brewery_array)
   end
 
-  def brewery_to_score(score_query)
-    id_from_query = score_query
-    Brewery.all.
 #take the requested brewery and add additional info
   def get_brewery_score(score_query)
     #take the brewery instance and give it more attributes
     scores = Brewery_Fetcher.fetch_score_info(score_query)
+  end
 
+  def add_scores_to_brewery(brewery_id, score_hash)
+    scored_brewery = Brewery.all.detect{|brewery| brewery.id = brewery_id}
+    scored_brewery.add_score_info(score_hash)
+    return scored_brewery
   end
 
   def display_breweries
@@ -105,8 +108,13 @@ class CommandLineInteface
 
 #display additional requested brewery info
   def display_score
-    Brewery.
-    end
+    puts "#{scored_brewery.name}".colorize(:purple)
+    puts "Overall score: #{scored_brewery.overall_score}".colorize(:red)
+    puts "Selection: #{scored_brewery.selection}"
+    puts "Service: #{scored_brewery.service}"
+    puts "Atmosphere: #{atmosphere}"
+    puts "Number of reviews: #{review_count}"
+    puts "Food: "
   end
 
 end
