@@ -1,15 +1,15 @@
-# # coding: utf-8
-# lib = File.expand_path('../lib', __FILE__)
-# $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-# require 'my_gem/version'
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'my_gem/version'
 
  Gem::Specification.new do |spec|
-   spec.name          = "my_gem"
+   spec.name          = "Brew_Finder"
    spec.version       = MyGem::VERSION
-   spec.authors       = ["Maintainer Name"]
-   spec.email         = ["maintainer@email.address"]
+   spec.authors       = ["Kathleen DaSilva"]
+   spec.email         = ["kayjsmith@cox.net"]
    spec.summary       = "Search for breweries/brewpubs using the Beer Mapping Project API"
-   spec.description   = %q{TODO: Write a longer description. Optional.}
+   spec.description   = "Search by city/state to find local breweries/brewpubs, also view rating information for indiviual locations."
    spec.homepage      = ""
    spec.license       = "MIT"
 
@@ -20,5 +20,6 @@
 
    spec.add_development_dependency "bundler", "~> 1.5"
    spec.add_development_dependency "rake"
+   spec.add_dependency "nokogiri"
  end
  mba:Git
