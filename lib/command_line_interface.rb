@@ -29,19 +29,19 @@ class CommandLineInterface
     DOC
     #first ask user for location query
     first_location_query = get_location_query
-    format_location_query(first_location_query)
+    formatted_location = format_location_query(first_location_query)
     #use results from get_query to get matching breweries
     #change to get_breweries
-    get_breweries(location_query)
+    get_breweries(formatted_location)
     #display_matching_breweries
     display_breweries
     #ask user for a brewery/breweries they want to learn more about
     first_score_query = get_score_query
-    formatted_query = format_score_query(first_score_query)
-    scores = get_brewery_score(formatted_query)
-    add_scores_to_brewery(first_score_query, scores)
+    formatted_score = format_score_query(first_score_query)
+    scores = get_brewery_score(formatted_score)
+    scored_brewery = add_scores_to_brewery(first_score_query, scores)
     #display brewery's additional info
-    display_score
+    display_score(scored_brewery)
   end
 
 
@@ -110,14 +110,14 @@ class CommandLineInterface
   end
 
 #display additional requested brewery info
-  def display_score
+  def display_score(scored_brewery)
     puts "#{scored_brewery.name}".colorize(:purple)
     puts "Overall score: #{scored_brewery.overall_score}".colorize(:red)
     puts "Selection: #{scored_brewery.selection}"
     puts "Service: #{scored_brewery.service}"
-    puts "Atmosphere: #{atmosphere}"
-    puts "Number of reviews: #{review_count}"
-    puts "Food: #{food}"
+    puts "Atmosphere: #{scored_brewery.atmosphere}"
+    puts "Number of reviews: #{scored_brewery.review_count}"
+    puts "Food: #{scored_brewery.food}"
   end
 
 end
