@@ -52,7 +52,7 @@ class CommandLineInterface
   #display_matching_breweries
   display_breweries
   first_score_query = get_score_query
-  formatted_query = format_score_query(first_score_query)
+  formatted_score = format_score_query(first_score_query)
   scores = get_brewery_score(formatted_query)
   bullshit
   end
@@ -95,7 +95,7 @@ class CommandLineInterface
   end
 
   def format_score_query(brewery_id)
-    score_query = BASE_PATH + 'locscore/' + KEY + '/' brewery_id
+    score_query = BASE_PATH + 'locscore/' + KEY + '/' + brewery_id
     score_query
   end
 
