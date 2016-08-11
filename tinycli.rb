@@ -52,6 +52,9 @@ class CommandLineInterface
   #display_matching_breweries
   display_breweries
   first_score_query = get_score_query
+  formatted_query = format_score_query(first_score_query)
+  scores = get_brewery_score(formatted_query)
+  bullshit
   end
 
   def format_location_query(location)
@@ -86,7 +89,25 @@ class CommandLineInterface
     end until id.match(/(\d{4,6})/)
     id
   end
+  def format_location_query(location)
+    location_query = BASE_PATH + 'loccity/' + KEY + location
+    location_query
+  end
 
+  def format_score_query(brewery_id)
+    score_query = BASE_PATH + 'locscore/' + KEY + '/' brewery_id
+    score_query
+  end
+
+  def get_brewery_score(score_query)
+    #take the brewery instance and give it more attributes
+    scores = Brewery_Fetcher.fetch_score_info(score_query)
+    scores
+  end
+
+  def bullshit
+    puts "this is some bullshit"
+  end
 
 end
 

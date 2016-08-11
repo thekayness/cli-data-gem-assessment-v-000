@@ -65,6 +65,7 @@ class CommandLineInterface
 
   def format_location_query(location)
     location_query = BASE_PATH + 'loccity/' + KEY + location
+    location_query
   end
 
   def get_score_query
@@ -72,7 +73,7 @@ class CommandLineInterface
     begin
       puts "A valid brewery id is between 4 and 6 digits:"
       id = gets.chomp
-    end until (id.match(/(\d{4,6})/))
+    end until id.match(/(\d{4,6})/)
     id
   end
 
@@ -90,6 +91,7 @@ class CommandLineInterface
   def get_brewery_score(score_query)
     #take the brewery instance and give it more attributes
     scores = Brewery_Fetcher.fetch_score_info(score_query)
+    scores
   end
 
   def add_scores_to_brewery(brewery_id, score_hash)
