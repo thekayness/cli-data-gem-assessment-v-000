@@ -1,0 +1,26 @@
+PATH
+  remote: .
+  specs:
+    Brew_Finder (0.1.0)
+      nokogiri
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    mini_portile2 (2.1.0)
+    nokogiri (1.6.8)
+      mini_portile2 (~> 2.1.0)
+      pkg-config (~> 1.1.7)
+    pkg-config (1.1.7)
+    rake (11.2.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  Brew_Finder!
+  bundler (~> 1.5)
+  rake
+
+BUNDLED WITH
+   1.12.5

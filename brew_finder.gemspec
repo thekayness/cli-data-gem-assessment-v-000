@@ -1,11 +1,11 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'my_gem/version'
+require 'Brew_Finder/version'
 
  Gem::Specification.new do |spec|
    spec.name          = "Brew_Finder"
-   spec.version       = MyGem::VERSION
+   spec.version       = BrewFinder::VERSION
    spec.authors       = ["Kathleen DaSilva"]
    spec.email         = ["kayjsmith@cox.net"]
    spec.summary       = "Search for breweries/brewpubs using the Beer Mapping Project API"
@@ -22,4 +22,3 @@ require 'my_gem/version'
    spec.add_development_dependency "rake"
    spec.add_dependency "nokogiri"
  end
- mba:Git

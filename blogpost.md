@@ -26,10 +26,12 @@ Step 3 Start Making Things happen
 - spend all day adjusting the CLI model
 - get stuck on an obvious bug for 4 hours
 - get final CLI logic up and running
-- figure out the actual gem process...
+- figure out the actual gem process...hint it's complicated maybe
 
 Thoughts:
 - a blank page is intimidating, drawing parallels between your model and an existing one is not
 - reusing testing feels great too!
 - start throwing spaghetti at the wall-something sticks, but don't stay here too long, you might be moving further from the solution
 - when you find a stubborn bug write down what you try to fix it, that way you won't get stuck chasing your tail for hours
+- sometimes at the end of it all, you picked an api that goes down right when you're ready to submit
+  - cry a little, hope it goes back up
