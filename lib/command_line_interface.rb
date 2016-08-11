@@ -28,18 +28,18 @@ class CommandLineInterface
                      (______________)
     DOC
     #first ask user for location query
-    location_query = get_location_query
-    format_location_query(location_query)
+    first_location_query = get_location_query
+    format_location_query(first_location_query)
     #use results from get_query to get matching breweries
     #change to get_breweries
     get_breweries(location_query)
     #display_matching_breweries
     display_breweries
     #ask user for a brewery/breweries they want to learn more about
-    get_score_query
-    format_score_query(id)
-    get_brewery_score(score_query)
-    add_scores_to_brewery(id, scores)
+    first_score_query = get_score_query
+    formatted_query = format_score_query(first_score_query)
+    scores = get_brewery_score(formatted_query)
+    add_scores_to_brewery(first_score_query, scores)
     #display brewery's additional info
     display_score
   end
@@ -115,7 +115,7 @@ class CommandLineInterface
     puts "Service: #{scored_brewery.service}"
     puts "Atmosphere: #{atmosphere}"
     puts "Number of reviews: #{review_count}"
-    puts "Food: "
+    puts "Food: #{food}"
   end
 
 end

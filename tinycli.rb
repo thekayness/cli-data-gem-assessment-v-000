@@ -51,6 +51,7 @@ class CommandLineInterface
   get_breweries(formatted_query)
   #display_matching_breweries
   display_breweries
+  first_score_query = get_score_query
   end
 
   def format_location_query(location)
@@ -70,10 +71,22 @@ class CommandLineInterface
     #puts "#{Brewery.all}"
     Brewery.all.each do |brewery|
       puts "#{brewery.name}".colorize(:magenta)
+      puts "Brewery ID no.#{brewery.id}"
       puts "#{brewery.street_address}".colorize(:blue)
       puts "#{brewery.phone}".colorize(:yellow)
     end
   end
+
+
+  def get_score_query
+    puts "Which brewery would you like to learn more about?"
+    begin
+      puts "A valid brewery id is between 4 and 6 digits:"
+      id = gets.chomp
+    end until id.match(/(\d{4,6})/)
+    id
+  end
+
 
 end
 
