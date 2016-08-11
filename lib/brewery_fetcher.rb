@@ -6,7 +6,7 @@ class Brewery_Fetcher
 
   def self.query_api(api_query)
     returned_request = Nokogiri::HTML(open(api_query))
-
+    puts "#{returned_request}"
     breweries = []
     #we gotta use something called xpath?
     returned_request.xpath("//location").each do |location|

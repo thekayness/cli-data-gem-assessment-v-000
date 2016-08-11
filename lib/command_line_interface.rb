@@ -39,6 +39,7 @@ class CommandLineInterface
       case input
       when /search/
         return_search
+        display_breweries
         score_menu
       when /exit/
         puts "Goodbye!"
@@ -51,9 +52,10 @@ class CommandLineInterface
 
   def return_search
     user_location_query = get_location_query
+    #puts "#{user_location_query}"
     formatted_query = format_location_query(user_location_query)
+    #puts "#{formatted_query}"
     get_breweries(formatted_query)
-    display_breweries
   end
 
   def score_menu
@@ -121,7 +123,7 @@ class CommandLineInterface
   end
 
   def format_location_query(location)
-    location_query = BASE_PATH + 'loccity/' + KEY + location
+    location_query = BASE_PATH + 'loccity/' + KEY + location.downcase
     location_query
   end
 
@@ -138,14 +140,15 @@ class CommandLineInterface
     score_query = BASE_PATH + 'locscore/' + KEY + '/' + brewery_id
   end
 #grab brewery objects from API
-  def get_breweries(location_query)
-    brewery_array = Brewery_Fetcher.query_api(location_query)
+  def get_breweries(formatted_location)
+    brewery_array = Brewery_Fetcher.query_api(formatted_location)
     #create instances of breweries from each brewery fetched
     Brewery.create_from_collection(brewery_array)
+    #puts "#{brewery_array}"
   end
 
 #take the requested brewery and add additional info
-  def get_brewery_score(score_query)
+  def get_brewery_score(formatted_score)
     #take the brewery instance and give it more attributes
     scores = Brewery_Fetcher.fetch_score_info(score_query)
     scores
