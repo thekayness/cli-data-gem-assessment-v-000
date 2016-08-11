@@ -69,10 +69,10 @@ class CommandLineInterface
 
   def get_score_query
     puts "Which brewery would you like to learn more about?"
-    until (id.match(/(\d{4,6})/))
+    begin
       puts "A valid brewery id is between 4 and 6 digits:"
       id = gets.chomp
-    end
+    end until (id.match(/(\d{4,6})/))
     id
   end
 
