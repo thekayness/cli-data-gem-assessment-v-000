@@ -21,8 +21,15 @@ Step 3 Start Making Things happen
 - try and record some video -- get attacked by giant moth, get bothered by SO, accidentally stop recording
 - while listening to myself, realize what I was doing wrong -- and that my voice sounds like I'm 10 years old
 - record some more video
+- pass first tests -- celebrate
+- get more tests passing
+- spend all day adjusting the CLI model
+- get stuck on an obvious bug for 4 hours
+- get final CLI logic up and running
+- figure out the actual gem process...
 
 Thoughts:
 - a blank page is intimidating, drawing parallels between your model and an existing one is not
 - reusing testing feels great too!
-- start throwing spaghetti at the wall-something sticks, but don't stay here too long
+- start throwing spaghetti at the wall-something sticks, but don't stay here too long, you might be moving further from the solution
+- when you find a stubborn bug write down what you try to fix it, that way you won't get stuck chasing your tail for hours

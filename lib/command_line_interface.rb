@@ -8,27 +8,52 @@ class CommandLineInterface
   BASE_PATH = "http://beermapping.com/webservice/"
   KEY = "21110efff66df69d91ec3909c0a38eed"
 
+#define welcome
+    def welcome
+      #first welcome user
+      puts "\e[H\e[2J"
+      puts <<-DOC
+                        o©ºº©oo©oº°©
+                        /           \
+                        |___________|____
+                        |            |____)
+                        |  WELCOME   |  | |
+                        |            |  | |
+                        |    TO      |  | |
+                        |            |  | |
+                        |  B R E W   |  | |
+                        |            |__|_|
+                        |   FINDER!  |____)
+                        |____________|
+                       (______________)
+      DOC
+      root_menu
+    end
+
+
+  def root_menu
+    puts "Type 'search' to look for breweries, or 'exit' to quit."
+    input = nil
+    while input != 'exit'
+      input = gets.chomp
+      if input == 'search'
+        return_search
+      else
+        puts "Sorry, what did you want to do?"
+      end
+    end
+    puts "Goodbye, enjoy your findings!"
+  end
+
+#define user choices, search, scores, return to breweries list, exit
+
+#define responses
+
 #what do we want to happen?
   def run
-    #first welcome user
-    puts "\e[H\e[2J"
-    puts <<-DOC
-                      o©ºº©oo©oº°©
-                      /           \
-                      |___________|____
-                      |            |____)
-                      |  WELCOME   |  | |
-                      |            |  | |
-                      |    TO      |  | |
-                      |            |  | |
-                      |  B R E W   |  | |
-                      |            |__|_|
-                      |   FINDER!  |____)
-                      |____________|
-                     (______________)
-    DOC
+
     #first ask user for location query
-    first_location_query = get_location_query
+
     formatted_location = format_location_query(first_location_query)
     #use results from get_query to get matching breweries
     #change to get_breweries
@@ -44,9 +69,14 @@ class CommandLineInterface
     display_score(scored_brewery)
   end
 
+  def return_search
+    user_location_query = get_location_query
+    formatted_query = format_location_query(user_location_query)
+    get_breweries(formatted_query)
+  end
 
-#make a method that asks for a city/state to query & formats for api request
-  #method name: get_query
+  def score_menu
+    puts "Would you like to see how people have rated a particular brewery?  "
 
   def get_location_query
     puts "Please enter the initials of a state you would like to search in:"
