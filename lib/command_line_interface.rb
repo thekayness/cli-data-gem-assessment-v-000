@@ -38,6 +38,7 @@ class CommandLineInterface
       input = gets.chomp
       if input == 'search'
         return_search
+        score_menu
       else
         puts "Sorry, what did you want to do?"
       end
@@ -50,24 +51,6 @@ class CommandLineInterface
 #define responses
 
 #what do we want to happen?
-  def run
-
-    #first ask user for location query
-
-    formatted_location = format_location_query(first_location_query)
-    #use results from get_query to get matching breweries
-    #change to get_breweries
-    get_breweries(formatted_location)
-    #display_matching_breweries
-    display_breweries
-    #ask user for a brewery/breweries they want to learn more about
-    first_score_query = get_score_query
-    formatted_score = format_score_query(first_score_query)
-    scores = get_brewery_score(formatted_score)
-    scored_brewery = add_scores_to_brewery(first_score_query, scores)
-    #display brewery's additional info
-    display_score(scored_brewery)
-  end
 
   def return_search
     user_location_query = get_location_query
@@ -76,7 +59,47 @@ class CommandLineInterface
   end
 
   def score_menu
-    puts "Would you like to see how people have rated a particular brewery?  "
+    puts "You can enter 'scores' if you would like to see how people have rated a brewery"
+    puts "You can also enter 'search' to start a new search, or enter 'exit' to quit."
+    input = nil
+    while input != 'exit'
+      input = gets.chomp
+      if input == 'scores'
+        return_scores
+        end_menu
+      elsif input == 'search'
+        return_search
+        scores_menu
+      else
+        puts "Sorry, what did you want to do?"
+      end
+    end
+    puts "Goodbye, enjoy your findings!"
+  end
+
+  def end_menu
+    puts "Enter 'list' to show the previous search, 'search' to start a new search, or 'exit' to quit."
+    input = nil
+    while input != 'exit'
+      input = gets.chomp
+      if input == 'list'
+        display_breweries
+        score_menu
+      elsif input == 'search'
+        return_search
+        score_menu
+      else
+        puts "Sorry, what did you want to do?"
+      end
+    end
+    puts "Goodbye, enjoy your findings!"
+  end
+
+  def return_scores
+    scores = get_brewery_score(formatted_score)
+    scored_brewery = add_scores_to_brewery(first_score_query, scores)
+    display_score(scored_brewery)
+  end
 
   def get_location_query
     puts "Please enter the initials of a state you would like to search in:"
