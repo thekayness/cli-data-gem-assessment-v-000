@@ -12,9 +12,9 @@ class Brewery
       #puts "#{key} #{value}"
       self.send(("#{key}="), value)
       #puts "#{self.phone}"
-      @@all << self
-    end
 
+    end
+    @@all << self
     #puts "#{@@all}"
   end
 

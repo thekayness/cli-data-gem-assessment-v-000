@@ -50,7 +50,7 @@ class CommandLineInterface
   #change to get_breweries
   get_breweries(formatted_query)
   #display_matching_breweries
-  #display_breweries
+  display_breweries
   end
 
   def format_location_query(location)
@@ -67,7 +67,7 @@ class CommandLineInterface
   end
 
   def display_breweries
-    puts "#{Brewery.all}"
+    #puts "#{Brewery.all}"
     Brewery.all.each do |brewery|
       puts "#{brewery.name}".colorize(:magenta)
       puts "#{brewery.street_address}".colorize(:blue)
