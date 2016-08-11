@@ -78,7 +78,7 @@ class CommandLineInterface
   end
 
   def format_score_query(brewery_id)
-    score_query = BASE_PATH + 'locscore/' + KEY + '/' brewery_id
+    score_query = BASE_PATH + 'locscore/' + KEY + '/' + brewery_id
   end
 #grab brewery objects from API
   def get_breweries(location_query)
