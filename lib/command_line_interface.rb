@@ -34,65 +34,69 @@ class CommandLineInterface
   def root_menu
     puts "Type 'search' to look for breweries, or 'exit' to quit."
     input = nil
-    while input != 'exit'
+    while input != "exit"
       input = gets.chomp
-      if input == 'search'
+      case input
+      when /search/
         return_search
         score_menu
+      when /exit/
+        puts "Goodbye!"
+        exit
       else
         puts "Sorry, what did you want to do?"
       end
     end
-    puts "Goodbye, enjoy your findings!"
   end
-
-#define user choices, search, scores, return to breweries list, exit
-
-#define responses
-
-#what do we want to happen?
 
   def return_search
     user_location_query = get_location_query
     formatted_query = format_location_query(user_location_query)
     get_breweries(formatted_query)
+    display_breweries
   end
 
   def score_menu
     puts "You can enter 'scores' if you would like to see how people have rated a brewery"
     puts "You can also enter 'search' to start a new search, or enter 'exit' to quit."
     input = nil
-    while input != 'exit'
+    while input != "exit"
       input = gets.chomp
-      if input == 'scores'
+      case input
+      when /scores/
         return_scores
         end_menu
-      elsif input == 'search'
+      when /search/
         return_search
         scores_menu
+      when /exit/
+        puts "Goodbye!"
+        exit
       else
         puts "Sorry, what did you want to do?"
       end
     end
-    puts "Goodbye, enjoy your findings!"
   end
 
   def end_menu
     puts "Enter 'list' to show the previous search, 'search' to start a new search, or 'exit' to quit."
     input = nil
-    while input != 'exit'
+    while input != "exit"
       input = gets.chomp
-      if input == 'list'
+      case input
+      when /list/
         display_breweries
         score_menu
-      elsif input == 'search'
+      when /search/
         return_search
         score_menu
+      when /exit/
+        puts "Goodbye!"
+        exit
       else
         puts "Sorry, what did you want to do?"
       end
     end
-    puts "Goodbye, enjoy your findings!"
   end
 
   def return_scores
