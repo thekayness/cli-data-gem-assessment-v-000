@@ -1,5 +1,4 @@
-require 'nokogiri'
-require 'colorize'
+
 
 class CommandLineInterface
 #change this to base api query
@@ -68,7 +67,7 @@ class CommandLineInterface
         end_menu
       when /search/
         return_search
-        scores_menu
+        score_menu
       when /exit/
         puts "Goodbye!"
         exit
@@ -104,7 +103,7 @@ class CommandLineInterface
     formatted_scores = format_score_query(id)
     scores = get_brewery_score(formatted_scores)
     scored_brewery = add_scores_to_brewery(id, scores)
-    #display_score(scored_brewery)
+    display_score(scored_brewery)
   end
 
   def get_location_query
@@ -156,12 +155,9 @@ class CommandLineInterface
 
   def add_scores_to_brewery(brewery_id, score_hash)
     if (score_hash == nil)
-      puts "#{score_hash}"
-      puts "Sorry, unable to retrieve scores for this establishment"
+      scored_brewery = nil
     else
       scored_brewery = Brewery.all.detect{|brewery| brewery.id = brewery_id}
-      #scored_brewery.add_score_info(score_hash)
-      scored_brewery
     end
   end
 
@@ -176,13 +172,17 @@ class CommandLineInterface
 
 #display additional requested brewery info
   def display_score(scored_brewery)
-    puts "#{scored_brewery.name}".colorize(:purple)
-    puts "Overall score: #{scored_brewery.overall_score}".colorize(:red)
-    puts "Selection: #{scored_brewery.selection}"
-    puts "Service: #{scored_brewery.service}"
-    puts "Atmosphere: #{scored_brewery.atmosphere}"
-    puts "Number of reviews: #{scored_brewery.review_count}"
-    puts "Food: #{scored_brewery.food}"
+    if (scored_brewery == nil)
+      puts "No scores seem to be available for this brewery."
+    else
+      puts "#{scored_brewery.name}".colorize(:purple)
+      puts "Overall score: #{scored_brewery.overall_score}".colorize(:red)
+      puts "Selection: #{scored_brewery.selection}"
+      puts "Service: #{scored_brewery.service}"
+      puts "Atmosphere: #{scored_brewery.atmosphere}"
+      puts "Number of reviews: #{scored_brewery.review_count}"
+      puts "Food: #{scored_brewery.food}"
+    end
   end
 
 end

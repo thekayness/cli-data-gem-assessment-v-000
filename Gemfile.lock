@@ -2,11 +2,13 @@ PATH
   remote: .
   specs:
     Brew_Finder (0.1.0)
+      colorize
       nokogiri
 
 GEM
   remote: https://rubygems.org/
   specs:
+    colorize (0.8.1)
     mini_portile2 (2.1.0)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)

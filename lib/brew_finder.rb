@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'open-uri'
+require 'colorize'
 
 require_relative './Brew_Finder/brewery_fetcher'
 require_relative './Brew_Finder/brewery_info'
