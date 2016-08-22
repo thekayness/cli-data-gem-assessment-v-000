@@ -6,4 +6,4 @@
 require_relative "../lib/brew_finder"
 
 
-BrewFinder::CommandLineInterface.new.welcome
+CommandLineInterface.new.welcome

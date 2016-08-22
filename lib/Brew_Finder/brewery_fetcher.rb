@@ -26,6 +26,7 @@ class Brewery_Fetcher
 #change to self.fetch_score_info
   def self.fetch_score_info(score_request)
     returned_scores = Nokogiri::HTML(open(score_request))
+    puts "#{returned_scores}"
     #brewery score profile
     score_location = returned_scores.xpath("//location")
     score_profile = {

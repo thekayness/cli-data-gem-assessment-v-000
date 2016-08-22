@@ -1,5 +1,3 @@
-require_relative "../lib/brewery_fetcher.rb"
-require_relative "../lib/brewery_info.rb"
 require 'nokogiri'
 require 'colorize'
 
@@ -102,9 +100,11 @@ class CommandLineInterface
   end
 
   def return_scores
-    scores = get_brewery_score(formatted_score)
-    scored_brewery = add_scores_to_brewery(first_score_query, scores)
-    display_score(scored_brewery)
+    id = get_score_query
+    formatted_scores = format_score_query(id)
+    scores = get_brewery_score(formatted_scores)
+    scored_brewery = add_scores_to_brewery(id, scores)
+    #display_score(scored_brewery)
   end
 
   def get_location_query
@@ -150,14 +150,19 @@ class CommandLineInterface
 #take the requested brewery and add additional info
   def get_brewery_score(formatted_score)
     #take the brewery instance and give it more attributes
-    scores = Brewery_Fetcher.fetch_score_info(score_query)
+    scores = Brewery_Fetcher.fetch_score_info(formatted_score)
     scores
   end
 
   def add_scores_to_brewery(brewery_id, score_hash)
-    scored_brewery = Brewery.all.detect{|brewery| brewery.id = brewery_id}
-    scored_brewery.add_score_info(score_hash)
-    scored_brewery
+    if (score_hash == nil)
+      puts "#{score_hash}"
+      puts "Sorry, unable to retrieve scores for this establishment"
+    else
+      scored_brewery = Brewery.all.detect{|brewery| brewery.id = brewery_id}
+      #scored_brewery.add_score_info(score_hash)
+      scored_brewery
+    end
   end
 
   def display_breweries
