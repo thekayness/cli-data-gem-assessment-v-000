@@ -8,14 +8,20 @@ class Brewery
 
   def initialize(brewery_hash)
     #puts "#{brewery_hash}"
+    count = 0
     brewery_hash.each do |key, value|
-      #puts "#{key} #{value}"
+      #puts "#{key}: #{value}"
+      #value.each do |key,value|
+      #  puts "#{key},#{value}"
+      #end
+      #puts "count = #{count}"
+      count += 1
       self.send(("#{key}="), value)
-      #puts "#{self.phone}"
+      #puts "#{self.street_address}"
 
     end
     @@all << self
-    #puts "#{@@all}"
+    #puts "#{self.inspect}"
   end
 
   #change students_array to brewery_array
@@ -25,11 +31,15 @@ class Brewery
       #Brewery.new
       #puts "#{brewery_hash} #{index}"
       Brewery.new(brewery_hash)
+      #puts "#{self.name} #{self.id}"
     end
   end
 
   #change to add_brewery_info, score_hash
   def add_score_info(score_hash)
+    if (score_hash == nil)
+      #puts "nildorado"
+    end
     #puts "#{score_hash}"
     score_hash.each do |key, value|
       self.send(("#{key}="), value)

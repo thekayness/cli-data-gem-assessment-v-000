@@ -34,6 +34,7 @@ class CommandLineInterface
       case input
       when /search/
         return_search
+        #Brewery.all.each {|brewery| puts "#{brewery.inspect}"}
         display_breweries
         score_menu
       when /exit/
@@ -61,10 +62,12 @@ class CommandLineInterface
       input = gets.chomp
       case input
       when /scores/
+        #Brewery.all.each {|brewery| puts "#{brewery.inspect}"}
         return_scores
         end_menu
       when /search/
         return_search
+        display_breweries
         score_menu
       when /exit/
         puts "Goodbye!"
@@ -86,6 +89,7 @@ class CommandLineInterface
         score_menu
       when /search/
         return_search
+        display_breweries
         score_menu
       when /exit/
         puts "Goodbye!"
@@ -98,11 +102,13 @@ class CommandLineInterface
 
   def return_scores
     id = get_score_query
+    #puts "id:#{id}"
     formatted_scores = format_score_query(id)
     scores = get_brewery_score(formatted_scores)
-    puts "#{scores}"
+    #puts "#{scores}"
+    #Brewery.all.each {|brewery| puts "#{brewery.inspect}"}
     scored_brewery = add_scores_to_brewery(id, scores)
-    #puts "#{}"
+    #puts "#{scored_brewery.name}"
     display_score(scored_brewery)
   end
 
@@ -154,10 +160,19 @@ class CommandLineInterface
   end
 
   def add_scores_to_brewery(brewery_id, score_hash)
+    #puts "brewery_id #{brewery_id.class} score hash #{score_hash}"
+    #Brewery.all.each {|brewery|puts "#{brewery.inspect}"}
+    scored_brewery_array = Brewery.all.select {|brewery| brewery.id == brewery_id.to_i}
+    #puts "#{scored_brewery_array}"
+    scored_brewery = scored_brewery_array[0]
+    #puts "#{scored_brewery.class}"
     if (score_hash == nil)
-      scored_brewery = nil
+      #puts "nildred"
+      scored_brewery
+
     else
-      scored_brewery = Brewery.all.detect{|brewery| brewery.id = brewery_id}
+      scored_brewery.add_score_info(score_hash)
+      scored_brewery
     end
   end
 
@@ -174,22 +189,22 @@ class CommandLineInterface
 
 #display additional requested brewery info
   def display_score(scored_brewery)
-    if (scored_brewery == nil)
+    if (scored_brewery.overall_score == nil)
       puts "No scores seem to be available for this brewery."
     else
-      puts "#{scored_brewery.name}".colorize(:magenta)
-      puts "Overall score: "
-      print "#{scored_brewery.overall_score}".colorize(:light_yellow)
-      puts "Selection: "
-      print "#{scored_brewery.selection}".colorize(:light_yellow)
-      puts "Service: "
-      print "#{scored_brewery.service}".colorize(:light_yellow)
-      puts "Atmosphere: "
-      print "#{scored_brewery.atmosphere}".colorize(:light_yellow)
-      puts "Number of reviews: "
-      print"#{scored_brewery.review_count}".colorize(:light_yellow)
-      puts "Food (if available): "
-      print "#{scored_brewery.food}".colorize(:light_yellow)
+      puts "#{scored_brewery.name}".colorize(:light_magenta)
+      print "Overall score: "
+      puts "#{scored_brewery.overall_score}".colorize(:light_yellow)
+      print "Selection: "
+      puts "#{scored_brewery.selection}".colorize(:light_yellow)
+      print "Service: "
+      puts "#{scored_brewery.service}".colorize(:light_yellow)
+      print "Atmosphere: "
+      puts "#{scored_brewery.atmosphere}".colorize(:light_yellow)
+      print "Number of reviews: "
+      puts"#{scored_brewery.review_count}".colorize(:light_yellow)
+      print "Food (if available): "
+      puts "#{scored_brewery.food}".colorize(:light_yellow)
     end
   end
 
