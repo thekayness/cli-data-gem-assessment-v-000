@@ -27,17 +27,21 @@ class Brewery_Fetcher
     #brewery score profile
     score_location = returned_scores.xpath("//location/*")
 
-    if (score_location.xpath("child::overall").text.to_i == 0)
+    if (score_location.xpath("//overall").text.to_i == 0)
+      #puts "fetcher error"
+
       score_profile = nil
     else
+      #puts "#{score_location.xpath("//overall").text}"
       score_profile = {
+
       #overall_score, selection, service, atmosphere, food, review_count
-        :overall_score => score_location.xpath("child::overall").text.to_f.round(1),
-        :selection => score_location.xpath("child::selection").text.to_f.round(2),
-        :service => score_location.xpath("child::service").text.to_f.round(2),
-        :atmosphere => score_location.xpath("child::atmosphere").text.to_f.round(2),
-        :review_count => score_location.xpath("child::reviewcount").text.to_i,
-        :food=>score_location.xpath("child::food").text.to_f.round(2)
+        :overall_score => score_location.xpath("//overall").text.to_f.round(1),
+        :selection => score_location.xpath("//selection").text.to_f.round(2),
+        :service => score_location.xpath("//service").text.to_f.round(2),
+        :atmosphere => score_location.xpath("//atmosphere").text.to_f.round(2),
+        :review_count => score_location.xpath("//reviewcount").text.to_i,
+        :food=>score_location.xpath("//food").text.to_f.round(2)
         }
         score_profile
     end

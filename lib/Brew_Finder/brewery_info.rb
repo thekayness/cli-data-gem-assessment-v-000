@@ -30,8 +30,10 @@ class Brewery
 
   #change to add_brewery_info, score_hash
   def add_score_info(score_hash)
+    #puts "#{score_hash}"
     score_hash.each do |key, value|
       self.send(("#{key}="), value)
+      #puts "#{key}= #{value}"
     end
   end
 

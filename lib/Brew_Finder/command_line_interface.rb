@@ -10,9 +10,7 @@ class CommandLineInterface
       #first welcome user
       puts "\e[H\e[2J"
       puts <<-DOC
-                        o©ºº©oo©oº°©
-                        /           \
-                        |___________|____
+                        o©ºº©oo©oº°©oo____
                         |            |____)
                         |  WELCOME   |  | |
                         |            |  | |
@@ -102,7 +100,9 @@ class CommandLineInterface
     id = get_score_query
     formatted_scores = format_score_query(id)
     scores = get_brewery_score(formatted_scores)
+    puts "#{scores}"
     scored_brewery = add_scores_to_brewery(id, scores)
+    #puts "#{}"
     display_score(scored_brewery)
   end
 
@@ -163,10 +163,12 @@ class CommandLineInterface
 
   def display_breweries
     Brewery.all.each do |brewery|
-      puts "#{brewery.name}".colorize(:purple)
+      print "Establishment: ".colorize(:light_yellow)
+      puts "#{brewery.name}".colorize(:yellow)
+      print "ID: ".colorize(:light_green)
       puts "#{brewery.id}".colorize(:green)
-      puts "#{brewery.street_address}".colorize(:blue)
-      puts "#{brewery.phone}".colorize(:orange)
+      puts "#{brewery.street_address}".colorize(:cyan)
+      puts "#{brewery.phone}".colorize(:light_blue)
     end
   end
 
@@ -175,13 +177,19 @@ class CommandLineInterface
     if (scored_brewery == nil)
       puts "No scores seem to be available for this brewery."
     else
-      puts "#{scored_brewery.name}".colorize(:purple)
-      puts "Overall score: #{scored_brewery.overall_score}".colorize(:red)
-      puts "Selection: #{scored_brewery.selection}"
-      puts "Service: #{scored_brewery.service}"
-      puts "Atmosphere: #{scored_brewery.atmosphere}"
-      puts "Number of reviews: #{scored_brewery.review_count}"
-      puts "Food: #{scored_brewery.food}"
+      puts "#{scored_brewery.name}".colorize(:magenta)
+      puts "Overall score: "
+      print "#{scored_brewery.overall_score}".colorize(:light_yellow)
+      puts "Selection: "
+      print "#{scored_brewery.selection}".colorize(:light_yellow)
+      puts "Service: "
+      print "#{scored_brewery.service}".colorize(:light_yellow)
+      puts "Atmosphere: "
+      print "#{scored_brewery.atmosphere}".colorize(:light_yellow)
+      puts "Number of reviews: "
+      print"#{scored_brewery.review_count}".colorize(:light_yellow)
+      puts "Food (if available): "
+      print "#{scored_brewery.food}".colorize(:light_yellow)
     end
   end
 
